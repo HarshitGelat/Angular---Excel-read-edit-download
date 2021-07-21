@@ -1,0 +1,16 @@
+
+
+<input type="file" (change)="onFileChange($event)" multiple="false" />
+<table class="sjs-table">
+	<tbody>
+		<tr *ngFor="let row of data; let r = index">
+			<td *ngFor="let val of row; let c = index; trackBy: customTrackBy">
+				<input [(ngModel)]="row[c]" *ngIf="row.canEdit && c!==0"				>	
+				<span *ngIf="!(row.canEdit && c!==0)">{{val}}</span>
+			</td>
+			<td><button *ngIf="r !== 0" (click)="row.canEdit = true">Edit</button></td>
+		</tr>
+	</tbody>
+</table>
+
+<button (click)="save()" [disabled]="data.length === 0">Save</button>
